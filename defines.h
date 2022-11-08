@@ -1,3 +1,5 @@
+#pragma once
+#include <string>
 enum modes
 {
     on,
@@ -9,3 +11,5 @@ enum modes
 
 #define Room_Light int
 #define TV bool
+
+#define Word std::string

@@ -1,11 +1,14 @@
 #include "defines.h"
 #include <fstream>
 #include "TV.h"
+#include "voice.h"
 
 modes cur1, cur2;
 
 Room_Light rm1, rm2;
 TV tv;
+
+int vs;
 
 void init()
 {
@@ -27,6 +30,12 @@ void import()
     case modes::on:
         rm1 = 1023;
         break;
+    case modes::downscaled_off:
+        rm1 = 0;
+        break;
+    case modes::downscaled_med:
+        rm1 = 512;
+        break;
     }
 
     switch (cur2)
@@ -40,6 +49,12 @@ void import()
     case modes::on:
         rm2 = 1023;
         break;
+    case modes::downscaled_off:
+        rm1 = 0;
+        break;
+    case modes::downscaled_med:
+        rm1 = 512;
+        break;
     }
 }
 
@@ -50,7 +65,7 @@ void get_tv_state()
 
 void downgrade(modes &r)
 {
-    if (r == modes::on)
+    if (r == modes::on || r == modes::downscaled_med)
         r = modes::downscaled_med;
     if (r == modes::med || r == modes::downscaled_off)
         r = modes::downscaled_off;
@@ -62,11 +77,23 @@ void check_tv_state()
         downgrade(cur1);
 }
 
+void get_voice_state1()
+{
+    vs = update_voice();
+}
+
+void set_voice_state()
+{
+    if (vs == 0)
+}
 int main()
 {
     init();
     while (true)
     {
         import();
+        get_tv_state();
+        check_tv_state();
+        get_voice_state();
     }
 }
