@@ -9,14 +9,14 @@ Room_Light rm1, rm2;
 TV tv;
 
 int vs;
-
+/// @brief Начальная инициализация переменных
 void init()
 {
     cur1 = modes::off;
     cur2 = modes::off;
     tv = false;
 }
-
+/// @brief Применение значений внутренних переменных к силе освещения
 void import()
 {
     switch (cur1)
@@ -57,12 +57,13 @@ void import()
         break;
     }
 }
-
+/// @brief Получение информации о том, включен телевизор или нет
 void get_tv_state()
 {
     tv = update_tv();
 }
-
+/// @brief Функция для понижения силы света от телевизора
+/// @param r Выбор комнаты для понижения
 void downgrade(modes &r)
 {
     if (r == modes::on || r == modes::downscaled_med)
@@ -70,18 +71,18 @@ void downgrade(modes &r)
     if (r == modes::med || r == modes::downscaled_off)
         r = modes::downscaled_off;
 }
-
+/// @brief Применение информации о состоянии телевизора
 void check_tv_state()
 {
     if (tv)
         downgrade(cur1);
 }
-
+/// @brief Получение последней голосовой команды
 void get_voice_state()
 {
     vs = update_voice();
 }
-
+/// @brief Установить состояние света согласно команды
 void set_voice_state()
 {
     if (vs == 0)
@@ -100,7 +101,7 @@ void set_voice_state()
         cur2 = modes::on;
     }
 }
-
+/// @brief Debug only - вывод информации о состоянии света
 void show_info()
 {
     std::cout << "Current state of light 1 = " << rm1 << "\n";
