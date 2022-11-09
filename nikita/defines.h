@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <ctime>
+#include <iostream>
 enum modes
 {
     on,

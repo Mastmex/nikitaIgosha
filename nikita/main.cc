@@ -77,7 +77,7 @@ void check_tv_state()
         downgrade(cur1);
 }
 
-void get_voice_state1()
+void get_voice_state()
 {
     vs = update_voice();
 }
@@ -85,6 +85,26 @@ void get_voice_state1()
 void set_voice_state()
 {
     if (vs == 0)
+    {
+        cur1 = modes::off;
+        cur2 = modes::off;
+    }
+    if (vs == 1)
+    {
+        cur1 = modes::med;
+        cur2 = modes::med;
+    }
+    if (vs == 2)
+    {
+        cur1 = modes::on;
+        cur2 = modes::on;
+    }
+}
+
+void show_info()
+{
+    std::cout << "Current state of light 1 = " << rm1 << "\n";
+    std::cout << "Current state of light 2 = " << rm2 << "\n";
 }
 int main()
 {
@@ -95,5 +115,8 @@ int main()
         get_tv_state();
         check_tv_state();
         get_voice_state();
+        set_voice_state();
+        show_info();
+        system("pause");
     }
 }
