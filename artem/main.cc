@@ -52,7 +52,7 @@ void set_tp()
         if (tp >= 22 && tp <= 25)
         {
             warm = false;
-            cond = true;
+            cond = false;
         }
         if (tp > 25)
         {
@@ -70,7 +70,7 @@ void set_tp()
         if (tp >= 20 && tp <= 22)
         {
             warm = false;
-            cond = true;
+            cond = false;
         }
         if (tp > 22)
         {
